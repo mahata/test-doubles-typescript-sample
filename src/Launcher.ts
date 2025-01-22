@@ -11,6 +11,10 @@ export class Launcher {
   }
 
   launchRocket() {
-    this.rocket.launch()
+    if (!this.launchCode.isExpired() && this.launchCode.isSigned()) {
+      this.rocket.launch()
+    } else {
+      this.rocket.disable()
+    }
   }
 }
