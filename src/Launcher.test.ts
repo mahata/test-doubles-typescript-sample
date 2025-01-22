@@ -46,6 +46,7 @@ it("発射コードが署名されていなければ、ロケットは発射し�
   rocket.verifyAbort()
 })
 
+// translation: When launch code is used already, rocket is not launched
 it("使用済みの発射コードであれば、ロケットは発射しない", () => {
   const rocket1 = new RocketMock()
   const rocket2 = new RocketMock()
