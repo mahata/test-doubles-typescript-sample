@@ -1,20 +1,14 @@
 import type { LaunchCode } from "./LaunchCode"
 import type { Rocket } from "./rocket"
+import type { UsedLaunchCodes } from "./UsedLaunchCodes"
 
 export class Launcher {
-  rocket: Rocket
-  launchCode: LaunchCode
-
-  constructor(rocket: Rocket, launchCode: LaunchCode) {
-    this.rocket = rocket
-    this.launchCode = launchCode
-  }
-
-  launchRocket() {
-    if (!this.launchCode.isExpired() && this.launchCode.isSigned()) {
-      this.rocket.launch()
+  launchRocket(rocket: Rocket, launchCode: LaunchCode, usedLaunchCodes: UsedLaunchCodes) {
+    if (!usedLaunchCodes.contain(launchCode) && !launchCode.isExpired() && launchCode.isSigned()) {
+      rocket.launch()
+      usedLaunchCodes.add(launchCode)
     } else {
-      this.rocket.disable()
+      rocket.disable()
     }
   }
 }
